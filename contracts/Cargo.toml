@@ -1,0 +1,18 @@
+[package]
+name = "org-vote"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = "22.0.0"
+
+[dev_dependencies]
+soroban-sdk = { version = "22.0.0", features = ["testutils"] }
+
+[profile.release-with-logs]
+inherits = "release"
+debug-assertions = true
