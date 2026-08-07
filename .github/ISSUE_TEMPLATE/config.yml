@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Contributing Guide
+    url: https://github.com/Abdullahi-Code9/org-vote-core/blob/main/CONTRIBUTING.md
+    about: Read how to contribute during Drips Wave sprints
+  - name: Stellar Developers
+    url: https://developers.stellar.org
+    about: Soroban and Stellar network documentation
