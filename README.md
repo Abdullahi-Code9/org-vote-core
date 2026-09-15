@@ -1,4 +1,4 @@
-# Org-Vote
+# 🗳️ Org-Vote Core
 
 ![CI](https://github.com/Abdullahi-Code9/org-vote-core/actions/workflows/ci.yml/badge.svg)
 
@@ -6,7 +6,7 @@
 
 Organizations need transparent, tamper-resistant ways to make collective decisions. Org-Vote provides a minimal on-chain polling system where members create polls, cast one vote each, and view live tallies — all secured by Soroban contract logic and signed with a Stellar wallet.
 
-## Features
+---
 
 - **Soroban smart contract** — create polls, cast votes, and read results on-chain
 - **One vote per address** — enforced at the contract layer via per-poll voter tracking
@@ -15,9 +15,15 @@ Organizations need transparent, tamper-resistant ways to make collective decisio
 - **Live results** — bar charts update as votes are cast
 - **CI/CD** — GitHub Actions runs frontend lint/build and contract tests on every push
 
-## Directory Structure
+- **Soroban Smart Contract:** Create polls, cast votes, and read results directly on-chain.
+- **One Vote Per Address:** Enforced strictly at the contract layer via per-poll voter tracking.
+- **Next.js Frontend:** Responsive UI with Freighter wallet integration (includes dev mock fallback).
+- **Live Results:** Visual bar charts that update dynamically as votes are cast.
+---
 
-```
+## 📂 Directory Structure
+
+```text
 org-vote-core/
 ├── .github/workflows/ci.yml  # GitHub Actions CI pipeline
 ├── app/                      # Next.js App Router pages and global styles
@@ -46,8 +52,9 @@ org-vote-core/
 ├── package.json
 └── README.md
 ```
+---
 
-## Prerequisites
+## 🛠️ Prerequisites
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -56,7 +63,9 @@ org-vote-core/
 | [Stellar CLI](https://developers.stellar.org/docs/tools/cli) | latest | Contract deploy & test |
 | [Freighter](https://www.freighter.app) | optional | Browser wallet for testnet/mainnet |
 
-## Local Setup
+---
+
+## 🚀 Local Setup
 
 ### Frontend
 
@@ -108,6 +117,7 @@ stellar contract deploy \
   --source <YOUR_TESTNET_SECRET_KEY> \
   --network testnet
 ```
+---
 
 Save the contract ID printed by the deploy command (starts with `C`).
 
@@ -143,22 +153,30 @@ When `NEXT_PUBLIC_CONTRACT_ID` is set, the UI queries the contract via Soroban R
 
 ## Contract API
 
-| Function | Description |
-|----------|-------------|
-| `create_poll(env, creator, title, options)` | Create a poll with at least two options. Returns poll ID. |
-| `cast_vote(env, poll_id, option_index, voter)` | Cast a vote. Reverts if the voter already voted in this poll. |
-| `get_poll(env, poll_id)` | Return poll metadata and current vote tallies. |
+| Function | Parameters | Description |
+| :--- | :--- | :--- |
+| `create_poll` | `(env, creator, title, options)` | Creates a new poll requiring at least two options. Returns a unique poll ID. |
+| `cast_vote` | `(env, poll_id, option_index, voter)` | Casts a vote for an option. Reverts if the voter address has already voted. |
+| `get_poll` | `(env, poll_id)` | Fetches poll metadata, options, and current vote tallies. |
 
-## Contributing
+---
 
-We welcome contributions from the community, especially during **Drips Wave** sprints. See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on opening issues and submitting pull requests.
+## 🤝 Contributing
 
-## License
+We welcome contributions from the community, especially during **Drips Wave** sprint cycles!
 
-MIT — see [LICENSE](./LICENSE).
+Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) guide for details on our workflow, PR standards, and how to claim active sprint issues.
 
-## Links
+---
 
-- [Stellar Developers](https://developers.stellar.org)
-- [Soroban Documentation](https://soroban.stellar.org/docs)
-- [Freighter Wallet](https://www.freighter.app)
+## 📄 License
+
+Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more information.
+
+---
+
+## 🔗 Resources
+
+- 🌐 [Stellar Developer Documentation](https://developers.stellar.org/)
+- ⚙️ [Soroban Smart Contract Docs](https://soroban.stellar.org/)
+- 👛 [Freighter Wallet](https://www.freighter.app/)
