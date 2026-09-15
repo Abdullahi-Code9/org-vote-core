@@ -76,7 +76,7 @@ impl OrgVote {
             .expect("poll not found");
 
         let idx = option_index as u32;
-        if idx as usize >= poll.options.len() {
+        if idx >= poll.options.len() {
             panic!("invalid option index");
         }
 
