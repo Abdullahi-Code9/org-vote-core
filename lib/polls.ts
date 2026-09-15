@@ -1,6 +1,7 @@
+import { isContractConfigured } from "./config";
 import type { Poll } from "./types";
 
-/** Seed polls for the prototype UI. Replace with Soroban contract reads in production. */
+/** Seed polls used when RPC is unavailable or contract ID is unset. */
 export const INITIAL_POLLS: Poll[] = [
   {
     id: 1,
@@ -24,6 +25,31 @@ export const INITIAL_POLLS: Poll[] = [
     creator: "GCKFBEIYTKPGAQQLRGQNE7OXY3H6G5H5QZ5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z",
   },
 ];
+
+export type PollDataSource = "contract" | "mock";
+
+export interface FetchPollsResult {
+  polls: Poll[];
+  source: PollDataSource;
+  error?: string;
+}
+
+/** Load polls from Soroban RPC when configured; otherwise fall back to mock data. */
+export async function fetchPollsWithFallback(): Promise<FetchPollsResult> {
+  if (!isContractConfigured()) {
+    return { polls: INITIAL_POLLS, source: "mock" };
+  }
+
+  try {
+    const { fetchPollsFromContract } = await import("./contract");
+    const polls = await fetchPollsFromContract();
+    return { polls, source: "contract" };
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : "Failed to fetch polls from Soroban RPC";
+    return { polls: INITIAL_POLLS, source: "mock", error: message };
+  }
+}
 
 export function castVoteLocal(
   polls: Poll[],

@@ -30,34 +30,28 @@ $Gh = Get-GhExecutable
 
 $issues = @(
     @{
-        Title  = "feat(ui): show poll total vote count in PollCard header"
-        Labels = "good first issue,drips-wave,frontend,100pts"
-        Body   = "01-trivial-poll-vote-count.md"
+        Title = "feat(ui): show poll total vote count in PollCard header"
+        Body  = "01-trivial-poll-vote-count.md"
     },
     @{
-        Title  = "docs: add Windows setup notes for contract and frontend dev"
-        Labels = "good first issue,drips-wave,documentation,100pts"
-        Body   = "02-trivial-windows-docs.md"
+        Title = "docs: add Windows setup notes for contract and frontend dev"
+        Body  = "02-trivial-windows-docs.md"
     },
     @{
-        Title  = "feat(integration): replace mock poll data with Soroban contract RPC reads"
-        Labels = "help wanted,drips-wave,integration,frontend,150pts"
-        Body   = "03-medium-soroban-rpc.md"
+        Title = "feat(integration): replace mock poll data with Soroban contract RPC reads"
+        Body  = "03-medium-soroban-rpc.md"
     },
     @{
-        Title  = "feat(contract): add poll expiration timestamps and block expired votes"
-        Labels = "help wanted,drips-wave,smart-contract,soroban,150pts"
-        Body   = "04-medium-poll-expiration.md"
+        Title = "feat(contract): add poll expiration timestamps and block expired votes"
+        Body  = "04-medium-poll-expiration.md"
     },
     @{
-        Title  = "feat(ui): add transaction status toast for wallet connect and vote actions"
-        Labels = "help wanted,drips-wave,frontend,ui,150pts"
-        Body   = "05-medium-status-toast.md"
+        Title = "feat(ui): add transaction status toast for wallet connect and vote actions"
+        Body  = "05-medium-status-toast.md"
     },
     @{
-        Title  = "feat(contract): implement token-weighted voting with configurable asset"
-        Labels = "help wanted,drips-wave,smart-contract,soroban,advanced,200pts"
-        Body   = "06-high-token-weighted-voting.md"
+        Title = "feat(contract): implement token-weighted voting with configurable asset"
+        Body  = "06-high-token-weighted-voting.md"
     }
 )
 
@@ -73,13 +67,12 @@ foreach ($issue in $issues) {
     Write-Host "`n→ $($issue.Title)" -ForegroundColor Yellow
 
     if ($DryRun) {
-        Write-Host "  [dry-run] gh issue create --title `"$($issue.Title)`" --label `"$($issue.Labels)`" --body-file `"$bodyFile`""
+        Write-Host "  [dry-run] gh issue create --title `"$($issue.Title)`" --body-file `"$bodyFile`""
         continue
     }
 
     & $Gh issue create `
         --title $issue.Title `
-        --label $issue.Labels `
         --body-file $bodyFile
 
     if ($LASTEXITCODE -ne 0) {
@@ -87,4 +80,4 @@ foreach ($issue in $issues) {
     }
 }
 
-Write-Host "`nDone. View issues: gh issue list --label drips-wave" -ForegroundColor Green
+Write-Host "`nDone. View issues using: gh issue list" -ForegroundColor Green
