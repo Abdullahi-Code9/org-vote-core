@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build
 
-  contracts:
+ contracts:
     name: Soroban Contracts
     runs-on: ubuntu-latest
     steps:
@@ -39,12 +39,6 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
-
-      - name: Pin conflicting transitive dependencies
-        run: |
-          cd contracts
-          cargo update -p ed25519-dalek --precise 2.1.0 || true
-          cargo update -p rand_core --precise 0.6.3 || true
 
       - name: Run Contract Unit Tests
         run: |
