@@ -45,7 +45,6 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/bin/
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
@@ -54,13 +53,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      - name: Install Stellar CLI
-        run: cargo install --locked stellar-cli
-
       - name: Run contract tests
         working-directory: contracts
         run: cargo test
 
-      - name: Build Soroban contract
+      - name: Build Soroban WASM
         working-directory: contracts
-        run: stellar contract build
+        run: cargo build --target wasm32-unknown-unknown --release
